@@ -1,0 +1,189 @@
+{
+	"node": "n8n-nodes-falconyte.falconyteTrigger",
+	"nodeVersion": "1.0",
+	"codexVersion": "1.0",
+	"categories": ["Marketing"],
+	"resources": {
+		"credentialDocumentation": [
+			{
+				"url": "https://docs.falconyte.dev/api/authentication"
+			}
+		],
+		"primaryDocumentation": [
+			{
+				"url": "https://docs.falconyte.dev/integrations/n8n"
+			}
+		],
+		"presets": [
+			{
+				"name": "On Email Queued",
+				"properties": {
+					"eventsUi": {
+						"eventValues": [
+							{
+								"name": "email.queued"
+							}
+						]
+					}
+				}
+			},
+			{
+				"name": "On Email Sent",
+				"properties": {
+					"eventsUi": {
+						"eventValues": [
+							{
+								"name": "email.sent"
+							}
+						]
+					}
+				}
+			},
+			{
+				"name": "On Email Soft Bounced",
+				"properties": {
+					"eventsUi": {
+						"eventValues": [
+							{
+								"name": "email.bounced.soft"
+							}
+						]
+					}
+				}
+			},
+			{
+				"name": "On Email Hard Bounced",
+				"properties": {
+					"eventsUi": {
+						"eventValues": [
+							{
+								"name": "email.bounced.hard"
+							}
+						]
+					}
+				}
+			},
+			{
+				"name": "On Email Deferred",
+				"properties": {
+					"eventsUi": {
+						"eventValues": [
+							{
+								"name": "email.deferred"
+							}
+						]
+					}
+				}
+			},
+			{
+				"name": "On Email Opened",
+				"properties": {
+					"eventsUi": {
+						"eventValues": [
+							{
+								"name": "email.opened"
+							}
+						]
+					}
+				}
+			},
+			{
+				"name": "On Email Clicked",
+				"properties": {
+					"eventsUi": {
+						"eventValues": [
+							{
+								"name": "email.clicked"
+							}
+						]
+					}
+				}
+			},
+			{
+				"name": "On Email Bot Opened",
+				"properties": {
+					"eventsUi": {
+						"eventValues": [
+							{
+								"name": "email.bot.opened"
+							}
+						]
+					}
+				}
+			},
+			{
+				"name": "On Email Bot Clicked",
+				"properties": {
+					"eventsUi": {
+						"eventValues": [
+							{
+								"name": "email.bot.clicked"
+							}
+						]
+					}
+				}
+			},
+			{
+				"name": "On Email Replied",
+				"properties": {
+					"eventsUi": {
+						"eventValues": [
+							{
+								"name": "email.replied"
+							}
+						]
+					}
+				}
+			},
+			{
+				"name": "On Contact Saved",
+				"properties": {
+					"eventsUi": {
+						"eventValues": [
+							{
+								"name": "email.contact.saved"
+							}
+						]
+					}
+				}
+			},
+			{
+				"name": "On Contact Unsubscribed",
+				"properties": {
+					"eventsUi": {
+						"eventValues": [
+							{
+								"name": "email.contact.unsubscribed"
+							}
+						]
+					}
+				}
+			},
+			{
+				"name": "On Lead Created",
+				"properties": {
+					"eventsUi": {
+						"eventValues": [
+							{
+								"name": "email.lead.created"
+							}
+						]
+					}
+				}
+			},
+			{
+				"name": "On Sale Created",
+				"properties": {
+					"eventsUi": {
+						"eventValues": [
+							{
+								"name": "email.sale.created"
+							}
+						]
+					}
+				}
+			}
+		]
+	}
+}
+

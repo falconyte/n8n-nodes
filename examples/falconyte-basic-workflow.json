@@ -1,0 +1,152 @@
+{
+  "name": "Falconyte Basic Automation",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "1",
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [260, 300]
+    },
+    {
+      "parameters": {
+        "resource": "contact",
+        "operation": "upsert",
+        "email": "user@example.com",
+        "additionalFields": {
+          "first_name": "Ada",
+          "last_name": "Lovelace",
+          "foreign_id": "ext-123",
+          "custom_fields": {
+            "dataset": "market-qualified"
+          }
+        }
+      },
+      "id": "2",
+      "name": "Falconyte Upsert Contact",
+      "type": "@n8n-nodes/falconyte.falconyte",
+      "typeVersion": 1,
+      "position": [540, 180],
+      "credentials": {
+        "falconyteApi": {
+          "id": "<YOUR_CREDENTIAL_ID>",
+          "name": "Falconyte API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "event",
+        "operation": "submit",
+        "event_name": "contact.saved",
+        "email": "user@example.com",
+        "payload": {
+          "source": "n8n-demo",
+          "status": "qualified"
+        }
+      },
+      "id": "3",
+      "name": "Falconyte Submit Event",
+      "type": "@n8n-nodes/falconyte.falconyte",
+      "typeVersion": 1,
+      "position": [820, 300],
+      "credentials": {
+        "falconyteApi": {
+          "id": "<YOUR_CREDENTIAL_ID>",
+          "name": "Falconyte API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "unsubscribe",
+        "operation": "single",
+        "foreign_id": "ext-123",
+        "reason": "User opted out from campaign follow-up"
+      },
+      "id": "4",
+      "name": "Falconyte Unsubscribe",
+      "type": "@n8n-nodes/falconyte.falconyte",
+      "typeVersion": 1,
+      "position": [1080, 420],
+      "credentials": {
+        "falconyteApi": {
+          "id": "<YOUR_CREDENTIAL_ID>",
+          "name": "Falconyte API"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "Falconyte Upsert Contact",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Falconyte Upsert Contact": {
+      "main": [
+        [
+          {
+            "node": "Falconyte Submit Event",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Falconyte Submit Event": {
+      "main": [
+        [
+          {
+            "node": "Falconyte Unsubscribe",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {
+    "Falconyte Upsert Contact": [
+      {
+        "json": {
+          "email": "user@example.com",
+          "first_name": "Ada",
+          "last_name": "Lovelace",
+          "foreign_id": "ext-123",
+          "custom_fields": {
+            "dataset": "market-qualified"
+          }
+        }
+      }
+    ],
+    "Falconyte Submit Event": [
+      {
+        "json": {
+          "event_name": "contact.saved",
+          "email": "user@example.com",
+          "payload": {
+            "source": "n8n-demo",
+            "status": "qualified"
+          }
+        }
+      }
+    ],
+    "Falconyte Unsubscribe": [
+      {
+        "json": {
+          "foreign_id": "ext-123",
+          "reason": "User opted out from campaign follow-up"
+        }
+      }
+    ]
+  }
+}
+

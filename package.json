@@ -1,0 +1,68 @@
+{
+  "name": "n8n-nodes-falconyte",
+  "version": "0.1.0",
+  "description": "Falconyte official community node for n8n",
+  "keywords": [
+    "n8n",
+    "workflow",
+    "falconyte",
+    "automation",
+    "marketing",
+    "email",
+    "n8n-community-node-package",
+    "n8n-nodes"
+  ],
+  "homepage": "https://falconyte.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/falconyte/falconyte-n8n-node.git"
+  },
+  "license": "MIT",
+  "author": "Falconyte <hello@falconyte.com>",
+  "main": "dist/nodes/Falconyte.node.js",
+  "types": "dist/nodes/Falconyte.node.d.ts",
+  "files": [
+    "dist"
+  ],
+  "n8n": {
+    "nodes": [
+      "dist/nodes/Falconyte.node.js",
+      "dist/nodes/FalconyteTrigger.node.js"
+    ],
+    "credentials": [
+      "dist/credentials/FalconyteApi.credentials.js"
+    ]
+  },
+  "scripts": {
+    "build": "npm run clean && npm run compile && npm run copy:assets",
+    "clean": "rimraf dist",
+    "compile": "tsc -p tsconfig.build.json",
+    "copy:assets": "mkdir -p dist/nodes && cp nodes/falconyte.svg dist/nodes/falconyte.svg && cp nodes/FalconyteTrigger.node.json dist/nodes/FalconyteTrigger.node.json",
+    "lint": "eslint . --ext .ts",
+    "test": "vitest run",
+    "prepare": "npm run build",
+    "watch": "n8n-node-dev watch"
+  },
+  "dependencies": {
+    "n8n-core": "^1.48.1",
+    "n8n-workflow": "^1.48.1"
+  },
+  "devDependencies": {
+    "@n8n_io/eslint-config": "^0.0.2",
+    "@types/node": "^18.19.0",
+    "@typescript-eslint/eslint-plugin": "^6.15.0",
+    "@typescript-eslint/parser": "^6.15.0",
+    "eslint": "^8.56.0",
+    "n8n-node-dev": "^1.2.0",
+    "rimraf": "^5.0.5",
+    "typescript": "^5.3.3",
+    "vitest": "^0.34.6"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
+
