@@ -201,3 +201,144 @@ export function buildWebhookDeliveriesQuery(
 	return query;
 }
 
+export function buildCampaignCreatePayload(params: {
+	name: string;
+	templateIds: string | IDataObject[];
+	mailAccountIds: string | IDataObject[];
+	events: string[];
+}): IDataObject {
+	const { name, templateIds, mailAccountIds, events } = params;
+
+	if (!name) {
+		throw new Error('Campaign name is required.');
+	}
+
+	const parsedTemplateIds =
+		typeof templateIds === 'string' ? (jsonParse(templateIds) as string[]) : templateIds;
+	const parsedMailAccountIds =
+		typeof mailAccountIds === 'string' ? (jsonParse(mailAccountIds) as string[]) : mailAccountIds;
+
+	if (!Array.isArray(parsedTemplateIds) || parsedTemplateIds.length === 0) {
+		throw new Error('At least one template ID is required.');
+	}
+
+	if (!Array.isArray(parsedMailAccountIds) || parsedMailAccountIds.length === 0) {
+		throw new Error('At least one mail account ID is required.');
+	}
+
+	if (!Array.isArray(events) || events.length === 0) {
+		throw new Error('At least one event is required.');
+	}
+
+	return {
+		name,
+		template_ids: parsedTemplateIds,
+		mail_account_ids: parsedMailAccountIds,
+		events,
+	};
+}
+
+export function buildCampaignSubmitPayload(params: {
+	eventName: string;
+	email?: string;
+	idempotencyKey?: string;
+}): IDataObject {
+	const { eventName, email, idempotencyKey } = params;
+
+	if (!eventName) {
+		throw new Error('Event name is required.');
+	}
+
+	if (!email && !idempotencyKey) {
+		throw new Error('Either email or idempotency_key must be provided.');
+	}
+
+	const body: IDataObject = {
+		event_name: eventName,
+	};
+
+	if (email) {
+		body.email = email;
+	}
+
+	if (idempotencyKey) {
+		body.idempotency_key = idempotencyKey;
+	}
+
+	return body;
+}
+
+export function buildEmailSendPayload(params: {
+	templateId: string;
+	mailAccountId: string;
+	toEmail: string;
+	additionalFields?: IDataObject;
+}): IDataObject {
+	const { templateId, mailAccountId, toEmail, additionalFields = {} } = params;
+
+	if (!templateId) {
+		throw new Error('Template ID is required.');
+	}
+
+	if (!mailAccountId) {
+		throw new Error('Mail Account ID is required.');
+	}
+
+	if (!toEmail) {
+		throw new Error('To Email is required.');
+	}
+
+	const body: IDataObject = {
+		template_id: templateId,
+		mail_account_id: mailAccountId,
+		to_email: toEmail,
+	};
+
+	for (const [key, value] of Object.entries(additionalFields)) {
+		if (value === '' || value === null || value === undefined) continue;
+
+		if (key === 'variables') {
+			body.variables = typeof value === 'string' ? jsonParse(value) : value;
+			continue;
+		}
+
+		body[key] = value;
+	}
+
+	return body;
+}
+
+export function buildTemplateCreatePayload(params: {
+	name: string;
+	content: string;
+	contentType: string;
+	additionalFields?: IDataObject;
+}): IDataObject {
+	const { name, content, contentType, additionalFields = {} } = params;
+
+	if (!name) {
+		throw new Error('Template name is required.');
+	}
+
+	if (!content) {
+		throw new Error('Template content is required.');
+	}
+
+	if (!contentType) {
+		throw new Error('Content type is required.');
+	}
+
+	const body: IDataObject = {
+		name,
+		content,
+		content_type: contentType,
+	};
+
+	for (const [key, value] of Object.entries(additionalFields)) {
+		if (value === '' || value === null || value === undefined) continue;
+		body[key] = value;
+	}
+
+	return body;
+}
+

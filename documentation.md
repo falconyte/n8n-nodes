@@ -89,6 +89,8 @@ Reactivating the trigger replaces any existing subscription with the latest conf
 
 ### Contact Upsert (Full)
 
+**Request:**
+
 ```json
 {
   "email": "john.doe@example.com",
@@ -104,6 +106,31 @@ Reactivating the trigger replaces any existing subscription with the latest conf
   "tags": ["vip", "newsletter"]
 }
 ```
+
+**Response:**
+
+```json
+{
+  "ok": true,
+  "contact": {
+    "id": "550e8400-e29b-41d4-a716-446655440000",
+    "email": "john.doe@example.com",
+    "team_id": "123e4567-e89b-12d3-a456-426614174000",
+    "is_new": true,
+    "first_name": "John",
+    "last_name": "Doe",
+    "phone": "+1234567890",
+    "foreign_id": "ext-123",
+    "country_code": "US",
+    "is_email_valid": null,
+    "validated_at": null,
+    "created_at": "2024-01-15T10:30:00Z",
+    "updated_at": "2024-01-15T10:30:00Z"
+  }
+}
+```
+
+The `is_new` field indicates whether the contact was newly created (`true`) or updated from an existing record (`false`).
 
 ### Event Submit
 

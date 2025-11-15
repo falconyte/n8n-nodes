@@ -3,12 +3,13 @@ import type {
 	IExecuteFunctions,
 	IHookFunctions,
 	IHttpRequestMethods,
+	ILoadOptionsFunctions,
 	IWebhookFunctions,
 	JsonObject,
 } from 'n8n-workflow';
 import { NodeApiError } from 'n8n-workflow';
 
-export type FalconyteContext = IExecuteFunctions | IHookFunctions | IWebhookFunctions;
+export type FalconyteContext = IExecuteFunctions | IHookFunctions | IWebhookFunctions | ILoadOptionsFunctions;
 
 function resolveBaseUrl(credentialsBaseUrl?: string): string {
 	const raw = (credentialsBaseUrl ?? 'https://api.falconyte.com/v1').replace(/\/$/, '');
