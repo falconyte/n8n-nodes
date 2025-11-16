@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-falconyte",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Falconyte official community node for n8n",
   "keywords": [
     "n8n",
@@ -18,7 +18,7 @@
   "homepage": "https://falconyte.com",
   "repository": {
     "type": "git",
-    "url": "https://github.com/falconyte/falconyte-n8n-node.git"
+    "url": "https://github.com/falconyte/n8n-nodes-falconyte.git"
   },
   "license": "MIT",
   "author": "Falconyte <hello@falconyte.com>",
