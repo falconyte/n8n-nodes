@@ -32,7 +32,7 @@ export async function falconyteRequest(
 
 	try {
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-return
-		return await this.helpers.requestWithAuthentication.call(this, 'falconyteApi', {
+		return await this.helpers.httpRequestWithAuthentication.call(this, 'falconyteApi', {
 			method: options.method,
 			url: options.url,
 			body: options.body,

@@ -15,13 +15,14 @@
   },
   "include": [
     "credentials/**/*",
-    "nodes/**/*",
-    "test/**/*",
-    "*.ts"
+    "nodes/**/*"
   ],
   "exclude": [
     "dist",
-    "node_modules"
+    "node_modules",
+    "test",
+    "**/*.test.ts",
+    "vitest.config.ts"
   ]
 }
 

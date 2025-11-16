@@ -9,7 +9,6 @@ import type {
 } from 'n8n-workflow';
 import { NodeOperationError } from 'n8n-workflow';
 import { createHmac, timingSafeEqual } from 'crypto';
-import { appendFileSync } from 'fs';
 
 import { webhookEventOptions } from './descriptions/WebhookDescription';
 import { falconyteRequest } from './helpers/api';
@@ -61,15 +60,9 @@ function logDebug(context: FalKeyedContext, message: string, data: IDataObject =
 		timestamp: new Date().toISOString(),
 	};
 
-	const line = `[FalconyteTrigger] ${message} ${JSON.stringify(payload)}\n`;
+	const line = `[FalconyteTrigger] ${message} ${JSON.stringify(payload)}`;
 
-	try {
-		appendFileSync('/tmp/falconyte-trigger.log', line, 'utf8');
-	} catch (error) {
-		// ignore fs errors
-	}
-
-	console.log(line.trim()); // eslint-disable-line no-console
+	console.log(line); // eslint-disable-line no-console
 }
 
 async function falconyteApiRequest(

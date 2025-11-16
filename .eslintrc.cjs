@@ -4,11 +4,23 @@ module.exports = {
     node: true,
     es2020: true,
   },
-  extends: ['@n8n_io/eslint-config'],
+  parser: '@typescript-eslint/parser',
   parserOptions: {
     project: ['./tsconfig.json'],
     tsconfigRootDir: __dirname,
+    ecmaVersion: 2020,
+    sourceType: 'module',
   },
-  ignorePatterns: ['dist', 'node_modules'],
+  plugins: ['@typescript-eslint'],
+  extends: [
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
+    'prettier',
+  ],
+  ignorePatterns: ['dist', 'node_modules', '*.js'],
+  rules: {
+    '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+  },
 };
 
